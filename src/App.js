@@ -11,9 +11,8 @@ function App() {
       const response = await axios.post("http://127.0.0.1:5000/predict", {
         review: review,
       });
-      console.log(response.data)
+      console.log(response.data);
       setResult(response.data.prediction);
-
     } catch (error) {
       console.error(error);
       setResult("Error connecting to backend 😢");
@@ -70,10 +69,18 @@ function App() {
         {result && (
           <h2
             className={`mt-8 text-2xl font-semibold ${
-              result === "positive" ? "text-green-600" : "text-red-600"
+              result === "positive"
+                ? "text-green-600"
+                : result === "negative"
+                ? "text-red-600"
+                : "text-gray-700"
             }`}
           >
-            Result: {result === "positive" ? "😊 Positive" : "😡 Negative"}
+            {result === "positive"
+              ? "Result: 😊 Positive"
+              : result === "negative"
+              ? "Result: 😡 Negative"
+              : `Oops! ${result}`}
           </h2>
         )}
       </div>
